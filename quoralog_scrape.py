@@ -14,8 +14,8 @@ from bs4 import BeautifulSoup
 
 browser = webdriver.Chrome()
 
-# url = "https://www.quora.com/Which-time-is-better-for-studying-night-or-day/log"
-url = "https://www.quora.com/What-are-some-amazing-facts-about-Google-or-Microsoft/log"
+url = "https://www.quora.com/Which-time-is-better-for-studying-night-or-day/log" 
+# url = "https://www.quora.com/What-are-some-amazing-facts-about-Google-or-Microsoft/log"
 browser.get(url)
 
 time.sleep(1)
@@ -24,7 +24,7 @@ time.sleep(1)
 elem = browser.find_elements_by_css_selector("div.pagedlist_item")
 
 #TODO Change for checking when page ends instead of static 20pagedowns.
-no_of_pagedowns = 40 
+no_of_pagedowns = 12
 
 while no_of_pagedowns:
     i = len(elem)
@@ -32,6 +32,8 @@ while no_of_pagedowns:
     
     elem[i-1].send_keys(Keys.PAGE_DOWN)
     time.sleep(1)
+    # elements = browser.find_elements_by_class_name("div.pagedlist_item pagedlist_hidden")
+    # print elements
     no_of_pagedowns-=1
 
 content = browser.page_source
@@ -52,7 +54,7 @@ print last_div.getText()
 links = last_div.findAll('a')
 link  = links[0]
 
-userlink = "https://www.quora.com",link.attrs['href']
+userlink = "quora",str(link.attrs['href'])
 
 print userlink
 
